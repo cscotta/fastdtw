@@ -49,7 +49,7 @@ public class TimeSeriesPoint
          else if (nextElement instanceof BigInteger)
             measurements[index] = ((BigInteger)nextElement).doubleValue();
          else
-            throw new InternalError("ERROR:  The element " + nextElement +
+            throw new RuntimeException("ERROR:  The element " + nextElement +
                                     " is not a valid numeric type");
 
          hashCode += new Double(measurements[index]).hashCode();

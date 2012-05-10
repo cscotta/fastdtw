@@ -73,7 +73,7 @@ class SwapFileMatrix implements CostMatrix
       }
       catch (FileNotFoundException e)
       {
-         throw new InternalError("ERROR:  Unable to create swap file: " + swapFile);
+         throw new RuntimeException("ERROR:  Unable to create swap file: " + swapFile);
       }  // end try
    }  // end Constructor
 
@@ -84,7 +84,7 @@ class SwapFileMatrix implements CostMatrix
    {
       if ( (row<window.minJforI(col)) || (row>window.maxJforI(col)) )
       {
-         throw new InternalError("CostMatrix is filled in a cell (col=" + col + ", row=" + row + ") that is not in the " +
+         throw new RuntimeException("CostMatrix is filled in a cell (col=" + col + ", row=" + row + ") that is not in the " +
                                   "search window");
       }
       else
@@ -101,7 +101,7 @@ class SwapFileMatrix implements CostMatrix
             try
             {
                if (isSwapFileFreed)
-                  throw new InternalError("The SwapFileMatrix has been freeded by the freeMem() method");
+                  throw new RuntimeException("The SwapFileMatrix has been freeded by the freeMem() method");
                else
                {
                   cellValuesFile.seek(cellValuesFile.length());  // move file poiter to end of file
@@ -113,7 +113,7 @@ class SwapFileMatrix implements CostMatrix
             }
             catch (IOException e)
             {
-               throw new InternalError("Unable to fill the CostMatrix in the Swap file (IOException)");
+               throw new RuntimeException("Unable to fill the CostMatrix in the Swap file (IOException)");
             }  // end try
 
             lastCol = currCol;
@@ -124,7 +124,7 @@ class SwapFileMatrix implements CostMatrix
             currCol[row-minCurrRow] = value;
          }
          else
-            throw new InternalError("A SwapFileMatrix can only fill in 2 adjacentcolumns at a time");
+            throw new RuntimeException("A SwapFileMatrix can only fill in 2 adjacentcolumns at a time");
       }  // end if
    }  // end put(...)
 
@@ -142,7 +142,7 @@ class SwapFileMatrix implements CostMatrix
          try
          {
             if (isSwapFileFreed)
-               throw new InternalError("The SwapFileMatrix has been freeded by the freeMem() method");
+               throw new RuntimeException("The SwapFileMatrix has been freeded by the freeMem() method");
             else
             {
                cellValuesFile.seek( colOffsets[col] + 8*(row-window.minJforI(col)) );
@@ -152,10 +152,10 @@ class SwapFileMatrix implements CostMatrix
          catch (IOException e)
          {
             if (col > currColIndex)
-               throw new InternalError("The requested value is in the search window but has not been entered into " +
+               throw new RuntimeException("The requested value is in the search window but has not been entered into " +
                                        "the matrix: (col=" + col + "row=" + row + ").");
             else
-               throw new InternalError("Unable to read CostMatrix in the Swap file (IOException)");
+               throw new RuntimeException("Unable to read CostMatrix in the Swap file (IOException)");
          }  // end try
       }  // end if
    }  // end get(..)

@@ -20,11 +20,11 @@ public class PAA extends TimeSeries
    public PAA(TimeSeries ts, int shrunkSize)
    {
       if (shrunkSize > ts.size())
-         throw new InternalError("ERROR:  The size of an aggregate representation may not be largerr than the \n" +
+         throw new RuntimeException("ERROR:  The size of an aggregate representation may not be largerr than the \n" +
                                  "original time series (shrunkSize=" + shrunkSize + " , origSize=" + ts.size() + ").");
 
       if (shrunkSize <= 0)
-         throw new InternalError("ERROR:  The size of an aggregate representation must be greater than zero and \n" +
+         throw new RuntimeException("ERROR:  The size of an aggregate representation must be greater than zero and \n" +
                                  "no larger than the original time series.");
 
       // Initialize private data.

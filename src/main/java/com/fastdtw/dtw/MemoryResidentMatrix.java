@@ -43,7 +43,7 @@ class MemoryResidentMatrix implements CostMatrix
    {
       if ((row<window.minJforI(col)) || (row>window.maxJforI(col)))
       {
-         throw new InternalError("CostMatrix is filled in a cell (col="+col+", row="+row+") that is not in the "+
+         throw new RuntimeException("CostMatrix is filled in a cell (col="+col+", row="+row+") that is not in the "+
                                  "search window");
       }
       else

@@ -48,7 +48,7 @@ class PartialWindowMatrix implements CostMatrix
    {
       if ( (row<window.minJforI(col)) || (row>window.maxJforI(col)) )
       {
-         throw new InternalError("CostMatrix is filled in a cell (col=" + col + ", row=" + row + ") that is not in the " +
+         throw new RuntimeException("CostMatrix is filled in a cell (col=" + col + ", row=" + row + ") that is not in the " +
                                   "search window");
       }
       else
@@ -68,7 +68,7 @@ class PartialWindowMatrix implements CostMatrix
             currCol[row-minCurrRow] = value;
          }
          else
-            throw new InternalError("A PartialWindowMatrix can only fill in 2 adjacentcolumns at a time");
+            throw new RuntimeException("A PartialWindowMatrix can only fill in 2 adjacentcolumns at a time");
       }  // end if
    }  // end put(...)
 

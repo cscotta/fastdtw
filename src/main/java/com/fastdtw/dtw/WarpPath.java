@@ -64,17 +64,17 @@ public class WarpPath
                tsJindexes.add(new Integer(st.nextToken()));
             }
             else
-               throw new InternalError("The Warp Path File '" + inputFile + "' has an incorrect format.  There must be\n" +
+               throw new RuntimeException("The Warp Path File '" + inputFile + "' has an incorrect format.  There must be\n" +
                                        "two numbers per line separated by commas");
          }  // end while loop
       }
       catch (FileNotFoundException e)
       {
-         throw new InternalError("ERROR:  The file '" + inputFile + "' was not found.");
+         throw new RuntimeException("ERROR:  The file '" + inputFile + "' was not found.");
       }
       catch (IOException e)
       {
-         throw new InternalError("ERROR:  Problem reading the file '" + inputFile + "'.");
+         throw new RuntimeException("ERROR:  Problem reading the file '" + inputFile + "'.");
       }  // end try block
 
    }
@@ -128,7 +128,7 @@ public class WarpPath
    {
       int index = tsIindexes.indexOf(new Integer(i));
       if (index < 0)
-         throw new InternalError("ERROR:  index '" + i + " is not in the " +
+         throw new RuntimeException("ERROR:  index '" + i + " is not in the " +
                                  "warp path.");
       final ArrayList matchingJs = new ArrayList();
       while (index<tsIindexes.size() && tsIindexes.get(index).equals(new Integer(i)))
@@ -142,7 +142,7 @@ public class WarpPath
    {
       int index = tsJindexes.indexOf(new Integer(j));
       if (index < 0)
-         throw new InternalError("ERROR:  index '" + j + " is not in the " +
+         throw new RuntimeException("ERROR:  index '" + j + " is not in the " +
                                  "warp path.");
       final ArrayList matchingIs = new ArrayList();
       while (index<tsJindexes.size() && tsJindexes.get(index).equals(new Integer(j)))

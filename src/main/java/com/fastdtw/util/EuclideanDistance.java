@@ -18,7 +18,7 @@ public class EuclideanDistance implements DistanceFunction
    public double calcDistance(double[] vector1, double[] vector2)
    {
       if (vector1.length != vector2.length)
-         throw new InternalError("ERROR:  cannot calculate the distance "
+         throw new RuntimeException("ERROR:  cannot calculate the distance "
                                  + "between vectors of different sizes.");
 
       double sqSum = 0.0;

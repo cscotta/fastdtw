@@ -119,12 +119,12 @@ public class TimeSeries
 
             // Make sure that the first column is labeled is for Time.
             if (labels.size() == 0)
-               throw new InternalError("ERROR:  The first row must contain label " +
+               throw new RuntimeException("ERROR:  The first row must contain label " +
                                        "information, it is empty!");
             else if (!isFirstColTime)
                labels.add(0, "Time");
             else if (isFirstColTime && !((String)labels.get(0)).equalsIgnoreCase("Time"))
-               throw new InternalError("ERROR:  The time column (1st col) in a time series must be labeled as 'Time', '" +
+               throw new RuntimeException("ERROR:  The time column (1st col) in a time series must be labeled as 'Time', '" +
                                        labels.get(0) + "' was found instead");
          }
          else    // time series file is not labeled
@@ -167,7 +167,7 @@ public class TimeSeries
                // Make sure that the current line has the correct number of
                //    currentLineValues in it.
     //           if (st.countTokens() != (labels.size()+ignoredCol))
-    //              throw new InternalError("ERROR:  Line " + (tsArray.size()+1) +
+    //              throw new RuntimeException("ERROR:  Line " + (tsArray.size()+1) +
     //                                      "contains the wrong number of currentLineValues. " +
     //                                      "expected:  " + (labels.size()+ignoredCol) + ", " +
     //                                      "found: " + st.countTokens());
@@ -188,7 +188,7 @@ public class TimeSeries
                      }
                      catch (NumberFormatException e)
                      {
-                        throw new InternalError("ERROR:  '" + currentToken + "' is not a valid number");
+                        throw new RuntimeException("ERROR:  '" + currentToken + "' is not a valid number");
                      }
 
                      currentLineValues.add(nextValue);
@@ -218,11 +218,11 @@ public class TimeSeries
       }
       catch (FileNotFoundException e)
       {
-         throw new InternalError("ERROR:  The file '" + inputFile + "' was not found.");
+         throw new RuntimeException("ERROR:  The file '" + inputFile + "' was not found.");
       }
       catch (IOException e)
       {
-         throw new InternalError("ERROR:  Problem reading the file '" + inputFile + "'.");
+         throw new RuntimeException("ERROR:  Problem reading the file '" + inputFile + "'.");
       }  // end try block
    }  // end constructor
 
@@ -318,7 +318,7 @@ public class TimeSeries
    {
       final int valueIndex = labels.indexOf(valueLabel);
       if (valueIndex < 0)
-         throw new InternalError("ERROR:  the label '" + valueLabel + "' was " +
+         throw new RuntimeException("ERROR:  the label '" + valueLabel + "' was " +
                                  "not one of:  " + labels);
 
       return ((TimeSeriesPoint)tsArray.get(pointIndex)).get(valueIndex-1);
@@ -340,13 +340,13 @@ public class TimeSeries
    public void addFirst(double time, TimeSeriesPoint values)
    {
       if (labels.size() != values.size()+1)  // labels include a label for time
-         throw new InternalError("ERROR:  The TimeSeriesPoint: " + values +
+         throw new RuntimeException("ERROR:  The TimeSeriesPoint: " + values +
                                  " contains the wrong number of values. " +
                                  "expected:  " + labels.size() + ", " +
                                  "found: " + values.size());
 
       if (time >= ((Double)timeReadings.get(0)).doubleValue())
-         throw new InternalError("ERROR:  The point being inserted into the " +
+         throw new RuntimeException("ERROR:  The point being inserted into the " +
                                  "beginning of the time series does not have " +
                                  "the correct time sequence. ");
 
@@ -358,13 +358,13 @@ public class TimeSeries
    public void addLast(double time, TimeSeriesPoint values)
    {
       if (labels.size() != values.size()+1)  // labels include a label for time
-         throw new InternalError("ERROR:  The TimeSeriesPoint: " + values +
+         throw new RuntimeException("ERROR:  The TimeSeriesPoint: " + values +
                                  " contains the wrong number of values. " +
                                  "expected:  " + labels.size() + ", " +
                                  "found: " + values.size());
 
       if ( (this.size()>0) && (time<=((Double)timeReadings.get(timeReadings.size()-1)).doubleValue()) )
-         throw new InternalError("ERROR:  The point being inserted at the " +
+         throw new RuntimeException("ERROR:  The point being inserted at the " +
                                  "end of the time series does not have " +
                                  "the correct time sequence. ");
 
