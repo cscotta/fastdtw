@@ -1,1 +1,8 @@
+target/*
+lib_managed/*
+*.idea
+*.iml
 .DS_Store
+*.gz
+*.ipr
+*.iws
