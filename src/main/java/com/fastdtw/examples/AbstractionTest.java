@@ -5,7 +5,7 @@
  * stansalvador@hotmail.com
  */
 
-package com.fastdtw;
+package com.fastdtw.examples;
 
 import com.fastdtw.timeseries.TimeSeries;
 import com.fastdtw.timeseries.PAA;
